@@ -1,12 +1,12 @@
 def get_plant_dict():
 	plant_dict = {
-		Entities.Bush:{"use":Entities.Bush, "buy":None, "ground":None, "action":plant},
-		Entities.Tree:{"use":Entities.Tree, "buy":None, "ground":None, "action":plant},
-		Entities.Grass:{"use":Entities.Grass, "buy":None, "ground":None, "action":plant},
-		Entities.Carrots:{"use":Entities.Carrots, "buy":Items.Carrot_Seed, "ground":Grounds.Soil, "action":plant},
-		Entities.Pumpkin:{"use":Entities.Pumpkin, "buy":Items.Pumpkin_Seed, "ground":Grounds.Soil, "action":plant},
-		Entities.Cactus:{"use":Entities.Cactus, "buy":Items.Cactus_Seed, "ground":Grounds.Soil, "action":plant},
-		Entities.Dinosaur:{"use":Items.Egg, "buy":Items.Egg, "ground":None, "action":use_item}
+		Entities.Grass:{"unlock":None, "use":Entities.Grass, "buy":None, "ground":None, "action":plant},
+		Entities.Bush:{"unlock":None, "use":Entities.Bush, "buy":None, "ground":None, "action":plant},
+		Entities.Tree:{"unlock":Unlocks.Trees, "use":Entities.Tree, "buy":None, "ground":None, "action":plant},
+		Entities.Carrots:{"unlock":Unlocks.Carrots, "use":Entities.Carrots, "buy":Items.Carrot_Seed, "ground":Grounds.Soil, "action":plant},
+		Entities.Pumpkin:{"unlock":Unlocks.Pumpkins, "use":Entities.Pumpkin, "buy":Items.Pumpkin_Seed, "ground":Grounds.Soil, "action":plant},
+		Entities.Cactus:{"unlock":Unlocks.Cactus, "use":Entities.Cactus, "buy":Items.Cactus_Seed, "ground":Grounds.Soil, "action":plant},
+		Entities.Dinosaur:{"unlock":Unlocks.Dinosaurs, "use":Items.Egg, "buy":Items.Egg, "ground":None, "action":use_item}
 	}
 	return plant_dict
 
@@ -31,16 +31,7 @@ def plant_by_name(name):
 
 def move_by_index(idx):
 	# north=0, east=1, south=2, west=3
-	idx %= 4
-	
-	if idx == 0:
-		return move(North)
-	if idx == 1:
-		return move(East)
-	if idx == 2:
-		return move(South)
-	if idx == 3:
-		return move(West)
+	return move([North, East, South, West][idx%4])
 
 def rand_int(max_excl):
 	return (random() * max_excl) // 1
